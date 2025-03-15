@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Phone } from 'lucide-react';
 
 interface ThinkingAnimationProps {
   thinking: boolean;
@@ -37,6 +38,7 @@ const ThinkingAnimation = ({ thinking, className }: ThinkingAnimationProps) => {
     >
       <div className="glass px-6 py-4 rounded-2xl flex items-center justify-center max-w-md mx-auto">
         <div className="flex items-center space-x-2">
+          <Phone className="text-primary w-5 h-5 animate-pulse" />
           <div className="w-1.5 h-1.5 rounded-full bg-primary animate-thinking-dot-1"></div>
           <div className="w-1.5 h-1.5 rounded-full bg-primary animate-thinking-dot-2"></div>
           <div className="w-1.5 h-1.5 rounded-full bg-primary animate-thinking-dot-3"></div>

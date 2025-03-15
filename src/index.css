@@ -5,33 +5,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 220 10% 10%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 10% 10%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 10% 10%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 220 50% 50%;
+    --primary: 265 80% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 10% 96%;
-    --secondary-foreground: 220 10% 30%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 10% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 220 10% 94%;
-    --accent-foreground: 220 10% 30%;
+    --accent: 265 80% 60%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 220 50% 50%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 265 80% 60%;
 
     --radius: 0.75rem;
 
@@ -45,44 +45,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 220 10% 7%;
-    --foreground: 0 0% 96%;
-
-    --card: 220 10% 9%;
-    --card-foreground: 0 0% 96%;
-
-    --popover: 220 10% 9%;
-    --popover-foreground: 0 0% 96%;
-
-    --primary: 220 50% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 10% 13%;
-    --secondary-foreground: 0 0% 90%;
-
-    --muted: 220 10% 13%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 220 10% 15%;
-    --accent-foreground: 0 0% 90%;
-
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 90%;
-
-    --border: 220 10% 20%;
-    --input: 220 10% 20%;
-    --ring: 220 50% 60%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  /* No need for dark mode as the default is now dark */
 }
 
 @layer base {
@@ -96,18 +59,20 @@
   
   /* Custom glass morphism classes */
   .glass {
-    @apply bg-white/80 dark:bg-black/40 backdrop-blur-md;
+    @apply bg-white/5 dark:bg-black/20 backdrop-blur-md border border-white/10;
   }
   
   .glass-card {
-    @apply bg-white/90 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg;
+    @apply bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/10 shadow-lg;
   }
 }
 
-/* Import SF Pro or similar font */
+/* Import Inter font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* Set font family */
 html {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+/* Animation keyframes already defined in tailwind.config.ts */
