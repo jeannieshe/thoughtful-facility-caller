@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -84,11 +85,41 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'thinking-dot-1': {
+					'0%, 100%': { opacity: '0.4', transform: 'translateY(0px)' },
+					'50%': { opacity: '1', transform: 'translateY(-2px)' }
+				},
+				'thinking-dot-2': {
+					'0%, 100%': { opacity: '0.4', transform: 'translateY(0px)' },
+					'50%': { opacity: '1', transform: 'translateY(-2px)' },
+				},
+				'thinking-dot-3': {
+					'0%, 100%': { opacity: '0.4', transform: 'translateY(0px)' },
+					'50%': { opacity: '1', transform: 'translateY(-2px)' },
+				},
+				'fade-in-up': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' },
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
+				},
+				'pulse-subtle': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'thinking-dot-1': 'thinking-dot-1 1.2s ease-in-out infinite',
+				'thinking-dot-2': 'thinking-dot-2 1.2s ease-in-out infinite 0.2s',
+				'thinking-dot-3': 'thinking-dot-3 1.2s ease-in-out infinite 0.4s',
+				'fade-in-up': 'fade-in-up 0.5s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite',
 			}
 		}
 	},
