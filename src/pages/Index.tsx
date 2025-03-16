@@ -52,18 +52,30 @@ const facilityData: FacilityData[] = [
 const Index = () => {
   const [isThinking, setIsThinking] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [visibleFacilities, setVisibleFacilities] = useState<string[]>([]);
   
   // Function to handle the animation sequence
   const startThinking = () => {
     setShowResults(false);
+    setVisibleFacilities([]);
     setIsThinking(true);
-    
-    // Simulate loading time, then show results
-    setTimeout(() => {
-      setIsThinking(false);
-      setTimeout(() => setShowResults(true), 300);
-    }, 4000);
   };
+  
+  // Handle animation completion
+  const handleAnimationComplete = () => {
+    setIsThinking(false);
+    setTimeout(() => setShowResults(true), 300);
+  };
+  
+  // Handle when a facility is found
+  const handleFacilityFound = (facilityName: string) => {
+    setVisibleFacilities(prev => [...prev, facilityName]);
+  };
+  
+  // Filter facilities to show only the ones that have been "found"
+  const filteredFacilities = facilityData.filter(facility => 
+    visibleFacilities.includes(facility.name)
+  );
   
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
@@ -84,11 +96,15 @@ const Index = () => {
           </Button>
         </div>
         
-        <ThinkingAnimation thinking={isThinking} />
+        <ThinkingAnimation 
+          thinking={isThinking} 
+          onAnimationComplete={handleAnimationComplete}
+          onFacilityFound={handleFacilityFound}
+        />
         
         <FacilityResults 
-          facilities={facilityData} 
-          visible={showResults}
+          facilities={filteredFacilities} 
+          visible={isThinking || showResults}
         />
       </div>
     </div>
