@@ -1,5 +1,7 @@
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { cn } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface ThinkingAnimationProps {
   thinking: boolean;
@@ -85,31 +87,35 @@ const ThinkingAnimation = ({ thinking, className, onAnimationComplete, onFacilit
   return (
     <div 
       className={cn(
-        "relative py-8 transition-all duration-500 ease-in-out h-[250px]",
+        "relative py-8 transition-all duration-500 ease-in-out h-[250px] w-full",
         thinking ? "opacity-100" : "opacity-0 pointer-events-none",
         className
       )}
     >
-      <div className="glass px-6 py-4 rounded-2xl max-w-md mx-auto h-full flex flex-col">
+      <div className="glass px-6 py-4 rounded-2xl w-full mx-auto h-full flex flex-col">
         <div className="flex items-center justify-center space-x-2 mb-4">
           <div className="w-2 h-2 rounded-full bg-primary animate-thinking-dot-1"></div>
           <div className="w-2 h-2 rounded-full bg-primary animate-thinking-dot-2"></div>
           <div className="w-2 h-2 rounded-full bg-primary animate-thinking-dot-3"></div>
         </div>
-        <div className="space-y-3 text-left flex-1 overflow-hidden">
-          {messages.map((message, index) => (
-            <p 
-              key={`${currentMessageIndex}-${index}`}
-              className="text-base md:text-lg font-medium text-foreground animate-fade-in"
-              style={{ 
-                animationDelay: `${100}ms`,
-                animationDuration: '300ms'
-              }}
-            >
-              {message}
-            </p>
-          ))}
-        </div>
+        <ScrollArea className="flex-1 w-full">
+          <div className="space-y-3 text-center">
+            {messages.map((message, index) => {
+              const isLatest = index === messages.length - 1;
+              return (
+                <p 
+                  key={`message-${currentMessageIndex}-${index}`}
+                  className={cn(
+                    "text-base md:text-lg font-medium transition-colors duration-500",
+                    isLatest ? "text-foreground" : "text-muted-foreground"
+                  )}
+                >
+                  {message}
+                </p>
+              );
+            })}
+          </div>
+        </ScrollArea>
       </div>
     </div>
   );

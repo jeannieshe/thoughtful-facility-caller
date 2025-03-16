@@ -100,6 +100,7 @@ const Index = () => {
           thinking={isThinking} 
           onAnimationComplete={handleAnimationComplete}
           onFacilityFound={handleFacilityFound}
+          className="w-full"
         />
         
         <FacilityResults 
