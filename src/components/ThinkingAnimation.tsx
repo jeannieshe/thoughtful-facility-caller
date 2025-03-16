@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -54,7 +53,7 @@ const ThinkingAnimation = ({ thinking, className, onAnimationComplete, onFacilit
     }
   }, [onAnimationComplete, onFacilityFound, currentMessageIndex, allMessages]);
 
-  // Show new messages sequentially
+  // Show new messages sequentially with a limit of 5 visible messages
   useEffect(() => {
     if (!thinking) {
       setMessages([]);
@@ -65,7 +64,16 @@ const ThinkingAnimation = ({ thinking, className, onAnimationComplete, onFacilit
     if (currentMessageIndex < allMessages.length) {
       const timer = setTimeout(() => {
         const newMessage = allMessages[currentMessageIndex];
-        setMessages(prev => [...prev, newMessage]);
+        setMessages(prev => {
+          // Only keep the most recent 4 messages to make room for the new one
+          // This ensures we always show exactly 5 messages maximum
+          const updatedMessages = [...prev];
+          if (updatedMessages.length >= 5) {
+            updatedMessages.shift(); // Remove the oldest message
+          }
+          return [...updatedMessages, newMessage];
+        });
+        
         checkForFacilityCompletion(newMessage);
         setCurrentMessageIndex(prev => prev + 1);
       }, 1500); // Adjust speed as needed for readability
@@ -77,23 +85,26 @@ const ThinkingAnimation = ({ thinking, className, onAnimationComplete, onFacilit
   return (
     <div 
       className={cn(
-        "relative py-8 transition-all duration-500 ease-in-out",
+        "relative py-8 transition-all duration-500 ease-in-out h-[250px]",
         thinking ? "opacity-100" : "opacity-0 pointer-events-none",
         className
       )}
     >
-      <div className="glass px-6 py-4 rounded-2xl max-w-md mx-auto">
+      <div className="glass px-6 py-4 rounded-2xl max-w-md mx-auto h-full flex flex-col">
         <div className="flex items-center justify-center space-x-2 mb-4">
           <div className="w-2 h-2 rounded-full bg-primary animate-thinking-dot-1"></div>
           <div className="w-2 h-2 rounded-full bg-primary animate-thinking-dot-2"></div>
           <div className="w-2 h-2 rounded-full bg-primary animate-thinking-dot-3"></div>
         </div>
-        <div className="space-y-2 text-left">
+        <div className="space-y-3 text-left flex-1 overflow-hidden">
           {messages.map((message, index) => (
             <p 
-              key={index} 
-              className="text-sm font-medium text-foreground animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              key={`${currentMessageIndex}-${index}`}
+              className="text-base md:text-lg font-medium text-foreground animate-fade-in"
+              style={{ 
+                animationDelay: `${100}ms`,
+                animationDuration: '300ms'
+              }}
             >
               {message}
             </p>
